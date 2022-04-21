@@ -6,68 +6,46 @@
     <body>
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
         <div id="app">
-            <table>
-                <thead>
-                    <th>BlockNumber</th>
-                    <th>timeStamp</th>
-                    <th>from</th>
-                    <th>to</th>
-                    <th>value</th>
-                    <th>gas</th>
-                    <th>gasPrice</th>
-                    
-                </thead>
-                <tbody>
-                    <tr v-for="data in info">
-                        <td>{{data["blockNumber"]}}</td>
-                        <td>{{data["timeStamp"]}}</td>
-                        <td>{{data["from"]}}</td>
-                        <td>{{data["to"]}}</td>
-                        <td>{{data["value"]}}</td>
-                        <td>{{data["gas"]}}</td>
-                        <td>{{data["gasPrice"]}}</td>
-                    </tr>
-                    
-                   </tbody>
-            </table>
+            <div id="plot">
+
+            </div>
+            <div class="table">
+                <table>
+                    <thead>
+                        <th>BlockNumber</th>
+                        <th>timeStamp</th>
+                        <th>from</th>
+                        <th>to</th>
+                        <th>value</th>
+                        <th>gas</th>
+                        <th>gasPrice</th>
+                        
+                    </thead>
+                    <tbody>
+                        <tr v-for="data in info">
+                            <td>{{data["blockNumber"]}}</td>
+                            <td>{{data["timeStamp"]}}</td>
+                            <td>{{data["from"]}}</td>
+                            <td>{{data["to"]}}</td>
+                            <td>{{data["value"]}}</td>
+                            <td>{{data["gas"]}}</td>
+                            <td>{{data["gasPrice"]}}</td>
+                        </tr>
+                        
+                       </tbody>
+                </table>
+            </div>
+            
           
             
            
         </div>
     </body>
-    <script>
-        new Vue({
-            el: '#app',
-            data(){
-                return {
-                    info: null
-                }
-            },
-            mounted () {
-                
 
-                axios
-
-                    .get('https://api.etherscan.io/api?module=account&action=txlist&address=0xb794f5ea0ba39494ce839613fffba74279579268&startblock=0&endblock=99999999&sort=asc&apikey=8GRQAZ8J54VI78VYXKEYUPFV3CI9MX528C')
-                    .then(response => {
-                        Object.values(response).forEach(element => {
-                            console.log(element.response);
-                            let data = [];
-                            if(element.response){
-                                data = element.response.split('[');
-                                data = JSON.parse(element.response);
-                                console.log(this.info);
-                                this.info = data["result"];
-                            }
-                          
-                            
-                        });
-                    })
-            }
-            
-        })
-    </script>
+    
+    <script src="./vue.js"> </script>
     
 </html>
 
